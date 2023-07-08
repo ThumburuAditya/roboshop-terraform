@@ -22,9 +22,38 @@ variable "components"{
       name          = "mongodb"
       instance_type = "t3.micro"
     }
+    user = {
+      name          = "user"
+      instance_type = "t3.micro"
+    }
+    cart = {
+      name          = "cart"
+      instance_type = "t3.micro"
+    }
+    shipping = {
+      name          = "shipping"
+      instance_type = "t3.micro"
+    }
+    mysql = {
+      name          = "mysql"
+      instance_type = "t3.micro"
+    }
+    rabbitmq = {
+      name          = "rabbitmq"
+      instance_type = "t3.micro"
+    }
+    payment = {
+      name          = "payment"
+      instance_type = "t3.micro"
+    }
+    dispatch = {
+      name          = "dispatch"
+      instance_type = "t3.micro"
+    }
+
   }
 }
-resource "aws_instance" "frontend" {
+resource "aws_instance" "instance" {
   for_each = var.components
   ami           = data.aws_ami.centos.image_id
   instance_type = each.value["instance-type"]
@@ -35,44 +64,11 @@ resource "aws_instance" "frontend" {
   }
 }
 
-/*resource "aws_route53_record" "frontend" {
+resource "aws_route53_record" "records" {
+  for_each = var.components
   zone_id = "Z06720662E9995DMBFZQQ"
-  name    = "frontend-dev.thumburuaditya.online"
+  name    = "${each.value["name"]}-dev.thumburuaditya.online"
   type    = "A"
   ttl     = 30
-  records = [aws_instance.frontend.private_ip]
+  records = [aws_instance.instance[each.value["name"]].private_ip]
 }
-
-resource "aws_instance" "mongodb" {
-  ami           = data.aws_ami.centos.image_id
-  instance_type = "t3.micro"
-
-  tags = {
-    Name = "mongodb"
-  }
-}
-
-resource "aws_route53_record" "mongodb" {
-  zone_id = "Z06720662E9995DMBFZQQ"
-  name    = "mongodb-dev.thumburuaditya.online"
-  type    = "A"
-  ttl     = 30
-  records = [aws_instance.mongodb.private_ip]
-}
-
-resource "aws_instance" "catalogue" {
-  ami           = data.aws_ami.centos.image_id
-  instance_type = "t3.micro"
-
-  tags = {
-    Name = "catalogue"
-  }
-}
-
-resource "aws_route53_record" "catalogue" {
-  zone_id = "Z06720662E9995DMBFZQQ"
-  name    = "catalogue-dev.thumburuaditya.online"
-  type    = "A"
-  ttl     = 30
-  records = [aws_instance.catalogue.private_ip]
-} */

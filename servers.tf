@@ -9,7 +9,7 @@ resource "aws_instance" "instance" {
   }
 }
 
-resource "null_resource" "provisioner" {
+/*resource "null_resource" "provisioner" {
   depends_on = [aws_instance.instance,aws_route53_record.records]
   for_each = var.components
   provisioner "remote-exec" {
@@ -27,7 +27,7 @@ resource "null_resource" "provisioner" {
     ]
   }
   }
-
+*/
 resource "aws_route53_record" "records" {
   for_each = var.components
   zone_id = "Z06720662E9995DMBFZQQ"

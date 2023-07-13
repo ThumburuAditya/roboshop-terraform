@@ -41,10 +41,12 @@ database_servers = {
   mysql = {
     name          = "mysql"
     instance_type = "t3.micro"
+    password = "Roboshop@1"
   }
   rabbitmq = {
     name          = "rabbitmq"
     instance_type = "t3.micro"
+    password = "roboshop123"
   }
 }
 env = "dev"

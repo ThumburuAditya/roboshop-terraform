@@ -18,10 +18,12 @@ app_servers = {
   shipping = {
     name          = "shipping"
     instance_type = "t3.micro"
+    password = "RoboShop@1"
   }
   payment = {
     name          = "payment"
     instance_type = "t3.micro"
+    password = "roboshop123"
   }
   dispatch = {
     name          = "dispatch"
@@ -41,7 +43,7 @@ database_servers = {
   mysql = {
     name          = "mysql"
     instance_type = "t3.micro"
-    password = "Roboshop@1"
+    password = "RoboShop@1"
   }
   rabbitmq = {
     name          = "rabbitmq"

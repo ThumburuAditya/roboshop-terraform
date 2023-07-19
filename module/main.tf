@@ -71,7 +71,6 @@ resource "aws_iam_role_policy" "ssm_ps_policy" {
           "Effect": "Allow",
           "Action": [
             "kms:Decrypt",
-            "kms:Encrypt",
             "ssm:GetParameterHistory",
             "ssm:GetParametersByPath",
             "ssm:GetParameters",

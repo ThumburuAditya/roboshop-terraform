@@ -1,5 +1,8 @@
 env = "dev"
 bastian_cidr = ["172.31.94.94/32"]
+default_vpc_id = "vpc-0d16f2e4477ffc365"
+default_vpc_cidr = "172.31.0.0/16"
+
 vpc = {
   main = {
     cidr_block = "10.0.0.0/16"

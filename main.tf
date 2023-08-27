@@ -7,7 +7,7 @@ module "vpc" {
   env = var.env
 }
 
-module "web" {
+module "app" {
   source = "git::https://github.com/ThumburuAditya/tf-module-app.git"
   for_each = var.app
   instance_type = each.value["instance_type"]

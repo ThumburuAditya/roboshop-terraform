@@ -25,11 +25,22 @@ module "app" {
   bastian_cidr = var.bastian_cidr
 
   subnet_ids = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnets", null), each.value["subnet_name"], null), "subnet_ids", null)
-
   vpc_id = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
-
   allow_app_cidr = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnets", null), each.value["allow_app_cidr"], null), "subnet_cidrs", null)
-
 
 }
 
+module "docdb" {
+  source = "git::https://github.com/ThumburuAditya/tf-module-docdb.git"
+  for_each = var.docdb
+  subnet_ids = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnets", null), "db", null), "subnet_ids", null)
+  cidr_block = each.value["cidr_block"]
+  subnets = each.value["subnets"]
+
+  tags = local.tags
+  env = var.env
+  default_vpc_id = var.default_vpc_id
+  default_vpc_cidr = var.default_vpc_cidr
+  default_vpc_rtid = var.default_vpc_rtid
+}
+variable "docdb" {}

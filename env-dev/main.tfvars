@@ -4,6 +4,7 @@ default_vpc_id = "vpc-0d16f2e4477ffc365"
 default_vpc_cidr = "172.31.0.0/16"
 default_vpc_rtid = "rtb-0447e15055c775a5d"
 kms_arn = "arn:aws:kms:us-east-1:363684552706:key/fac9ed94-2498-4257-bc1f-36c4e18ca563"
+
 vpc = {
   main = {
     cidr_block = "10.0.0.0/16"
@@ -73,7 +74,6 @@ app = {
     subnet_name = "app"
   }*/
 }
-
 docdb = {
   main ={
     subnet_name = "db"

@@ -30,7 +30,7 @@ module "app" {
 
 }
 
-/*module "docdb" {
+module "docdb" {
   source = "git::https://github.com/ThumburuAditya/tf-module-docdb.git"
   for_each = var.docdb
   subnets = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnets", null), each.value["subnet_name"], null), "subnet_ids", null)
@@ -42,4 +42,4 @@ module "app" {
   vpc_id = local.vpc_id
   kms_arn = var.kms_arn
 
-}*/
+}

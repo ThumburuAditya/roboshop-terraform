@@ -33,14 +33,11 @@ module "app" {
 module "docdb" {
   source = "git::https://github.com/ThumburuAditya/tf-module-docdb.git"
   for_each = var.docdb
-  subnet_ids = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnets", null), "db", null), "subnet_ids", null)
-  cidr_block = each.value["cidr_block"]
-  subnets = each.value["subnets"]
-
+  subnet_ids = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnets", null), each.value["subnet_name"], null), "subnet_ids", null)
+  allow_db_cird =lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnets", null), each.value["allow_db_cidr"], null), "subnet_cidrs", null)
   tags = local.tags
   env = var.env
-  default_vpc_id = var.default_vpc_id
-  default_vpc_cidr = var.default_vpc_cidr
-  default_vpc_rtid = var.default_vpc_rtid
+  vpc_id = local.vpc_id
+  kms_arn = var.kms_arn
+
 }
-variable "docdb" {}

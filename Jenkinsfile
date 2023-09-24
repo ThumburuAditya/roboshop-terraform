@@ -5,7 +5,7 @@ pipeline{
         }
     }
 parameters{
-    choice(name: 'CHOICE', choices: ['Dev', 'prod'], description: 'Chose the ENV')
+    choice(name: 'env', choices: ['dev', 'prod'], description: 'Chose the ENV')
 }
 stages{
     stage('Terraform INIT'){

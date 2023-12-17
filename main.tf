@@ -83,7 +83,7 @@ module "rabbitmq" {
   domain_id    = var.domain_id
 }
 module "alb" {
-  source = "git::https://github.com/raghudevopsb72/tf-module-alb.git"
+  source = "git::https://github.com/ThumburuAditya/tf-module-alb.git"
   for_each       = var.alb
   subnets        = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnets", null), each.value["subnet_name"], null), "subnet_ids", null)
   allow_alb_cidr = each.value["name"] == "public" ? ["0.0.0.0/0"] : concat(lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnets", null), each.value["allow_alb_cidr"], null), "subnet_cidrs", null), lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnets", null), "app", null), "subnet_cidrs", null))
@@ -96,7 +96,7 @@ module "alb" {
 
 module "app" {
   depends_on = [module.vpc, module.docdb, module.rds, module.elasticache, module.rabbitmq, module.alb]
-  source     = "git::https://github.com/raghudevopsb72/tf-module-app.git"
+  source     = "git::https://github.com/ThumburuAditya/tf-module-app.git"
 
   for_each          = var.app
   instance_type     = each.value["instance_type"]
